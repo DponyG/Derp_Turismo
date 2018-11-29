@@ -18,11 +18,13 @@ public class AuthenticationManager : MonoBehaviour {
     public Text textEmail;
     public Text textPassword;
     public Text textReenterPassword;
+
+    WWWForm form;
        
 
 	// Use this for initialization
 	void Start () {
-        displayLoginPanel();
+        DisplayLoginPanel();
 	}
 	
 	// Update is called once per frame
@@ -30,8 +32,29 @@ public class AuthenticationManager : MonoBehaviour {
 		
 	}
 
-    public void displayLoginPanel() {
+    public void DisplayLoginPanel() {
         buttonRegister.SetActive(false);
         fieldReenterPassword.SetActive(false);
+    }
+
+    public void LoginButtonTapped() {
+    
+        StartCoroutine("RequestLogin");
+    }
+
+    public IEnumerator RequestLogin() {
+        string email = textEmail.text;
+        string password = textPassword.text;
+        print(email);
+        print(password);
+
+        form = new WWWForm();
+        form.AddField("email", email);
+        form.AddField("password", password);
+
+        WWW w = new WWW("http://localhost/unity/action_login.php", form);
+        yield return w;
+
+        Debug.Log(w.text);     
     }
 }
