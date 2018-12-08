@@ -55,6 +55,9 @@ public class AuthenticationManager : MonoBehaviour {
         WWW w = new WWW("http://localhost/unity/action_login.php", form);
         yield return w;
 
+        if (!string.IsNullOrEmpty(w.error))
+            Debug.Log(w.error);
+
         Debug.Log(w.text);     
     }
 }
