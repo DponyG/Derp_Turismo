@@ -15,6 +15,10 @@ public class PlayerId : MonoBehaviour {
         
     }
 
+    public int getId() {
+        return _id;
+    }
+
     
     
 

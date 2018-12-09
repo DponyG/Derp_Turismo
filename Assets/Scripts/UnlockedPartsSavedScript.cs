@@ -58,4 +58,38 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 		newEngine.GetComponentInChildren<Toggle>().group = toggleGroup;
 		newEngine.name = partName + s;
 	}
+
+	public IEnumerator getParts() {
+
+        form = new WWWForm();
+        form.AddField("playerId", playerId);
+
+        WWW w = new WWW("https://derpturismo.000webhostapp.com/get_engines.php", form);
+        yield return w;
+
+        string dataId = w.text;
+        Debug.Log(dataId);
+
+        if (!string.IsNullOrEmpty(w.error))
+            Debug.Log(w.error);
+
+        if (!w.text.Contains("password incorrect") 
+            && !w.text.Contains("user not found")){
+            int num = Int32.Parse(dataId);
+            playerId.GetComponent<PlayerId>().setId(num);
+            successfulLogin();
+
+		data = w.text;
+		string[] engineRows = data.Split("\n");
+		foreach (string s in engineRows) {
+			string[] engine = s.Split(",");
+			// id
+			// cost 
+			// name 
+			// horsepower 
+			// partId
+		}
+		 
+    	}
+	}
 }
