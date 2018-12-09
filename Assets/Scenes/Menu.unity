@@ -400,7 +400,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 396153779}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1418501242}
+        m_MethodName: DisplayRegistrationPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &396153779
@@ -918,7 +929,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -24.9, y: -80.4}
+  m_AnchoredPosition: {x: -24.9, y: -35.1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1088962173
@@ -1245,7 +1256,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonJoinGame: {fileID: 0}
-  buttonRegister: {fileID: 396153776}
+  buttonLogin: {fileID: 1088962171}
+  buttonSignUp: {fileID: 1770337781}
   mainMenu: {fileID: 0}
   fieldUserName: {fileID: 0}
   fieldEmailAddress: {fileID: 1866282962}
@@ -1539,7 +1551,7 @@ GameObject:
   - component: {fileID: 1843602804}
   - component: {fileID: 1843602803}
   m_Layer: 5
-  m_Name: LoginText
+  m_Name: SignUpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

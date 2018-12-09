@@ -9,6 +9,7 @@ public class AuthenticationManager : MonoBehaviour {
     public GameObject buttonLogin;
     public GameObject buttonSignUp;
     public GameObject mainMenu;
+    public GameObject buttonRegister;
 
     public GameObject fieldUserName;
     public InputField fieldEmailAddress;
@@ -35,6 +36,7 @@ public class AuthenticationManager : MonoBehaviour {
 
     public void DisplayLoginPanel() {
         buttonSignUp.SetActive(false);
+        buttonRegister.SetActive(true);
         buttonLogin.SetActive(true);
         fieldReenterPassword.SetActive(false);
     }
@@ -52,6 +54,11 @@ public class AuthenticationManager : MonoBehaviour {
     
         StartCoroutine("RequestLogin");
     }
+
+    //public IEnumerator InsertUser() {
+    //    string email = fieldEmailAddress.text;
+    //    string password = textPassword
+    //}
 
     public IEnumerator RequestLogin() {
         string email = fieldEmailAddress.text;
