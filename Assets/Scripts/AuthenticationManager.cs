@@ -88,11 +88,6 @@ public class AuthenticationManager : MonoBehaviour {
      
     }
 
-    //public IEnumerator InsertUser() {
-    //    string email = fieldEmailAddress.text;
-    //    string password = textPassword
-    //}
-
     public IEnumerator RequestLogin() {
         string email = fieldEmailAddressText.text;
         string password = fieldPasswordText.text;
