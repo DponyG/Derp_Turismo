@@ -91,6 +91,9 @@ public class AuthenticationManager : MonoBehaviour {
         WWW w = new WWW("https://derpturismo.000webhostapp.com/action_login.php", form);
         yield return w;
 
+        string itemsDataString = w.text;
+        Debug.Log(itemsDataString);
+
         if (!string.IsNullOrEmpty(w.error))
             Debug.Log(w.error);
 
