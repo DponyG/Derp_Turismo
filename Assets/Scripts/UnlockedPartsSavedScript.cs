@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.IO;
 using System.Text;
@@ -8,20 +9,23 @@ using System.Text;
 
 public class UnlockedPartsSavedScript : MonoBehaviour {
 
-	public string fileName = "tester.txt";
+	public string fileName;
+	public string partName;
 	public string directory = "~/";
 
 	public GameObject player;
 
+	public GameObject prefab;
+
 	// Use this for initialization
 	void Start () {
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < UnityEngine.Random.Range(1,10); i++) {
 			saveNewPart(i);
 		}
 
 		string[] parts = readParts();
 		foreach (string s in parts) {
-			Debug.Log(s);
+			PopulateEngine(s);
 		}
 	}
 	
@@ -42,5 +46,12 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 
 	string[] readParts() {
 		return File.ReadAllLines(fileName);
+	}
+
+	void PopulateEngine(string s) {
+		GameObject newEngine; 
+		newEngine = (GameObject)Instantiate(prefab, transform);
+		newEngine.GetComponent<Text>().text = partName + s + "	Cost: $" + UnityEngine.Random.Range(1,100).ToString();
+		newEngine.name = "Engine" + s;
 	}
 }
