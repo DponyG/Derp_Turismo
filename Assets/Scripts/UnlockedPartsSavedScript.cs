@@ -17,6 +17,8 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 
 	public GameObject prefab;
 
+	private ToggleGroup toggleGroup;
+
 	// Use this for initialization
 	void Start () {
 		for (int i = 0; i < UnityEngine.Random.Range(1,10); i++) {
@@ -25,8 +27,10 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 
 		string[] parts = readParts();
 		foreach (string s in parts) {
-			PopulateEngine(s);
+			PopulatePart(s);
 		}
+
+		toggleGroup = ToggleGroup.Find(partName + "toggle group");
 	}
 	
 	// Update is called once per frame
@@ -48,10 +52,11 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 		return File.ReadAllLines(fileName);
 	}
 
-	void PopulateEngine(string s) {
+	void PopulatePart(string s) {
 		GameObject newEngine; 
 		newEngine = (GameObject)Instantiate(prefab, transform);
 		newEngine.GetComponent<Text>().text = partName + s + "	Cost: $" + UnityEngine.Random.Range(1,100).ToString();
-		newEngine.name = "Engine" + s;
+		newEngine.GetComponent<Toggle>().group = toggleGroup;
+		newEngine.name = partName + s;
 	}
 }
