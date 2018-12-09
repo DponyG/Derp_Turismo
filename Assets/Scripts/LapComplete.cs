@@ -11,6 +11,9 @@ public class LapComplete : MonoBehaviour {
     public GameObject minDisplay;
     public GameObject secDisplay;
     public GameObject milDisplay;
+    public GameObject LapCount;
+
+    private int LapsDone;
 
     LapTimeManager lapTime;
     
@@ -25,27 +28,32 @@ public class LapComplete : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        print(lapTime.SecondCount);
+        print("lol");
    
     }
 
     void OnTriggerEnter(Collider other) {
-       if(lapTime.SecondCount <= 9) {
-            secDisplay.GetComponent<Text>().text = "0" + lapTime.SecondCount+ ".";
-        } else {
-            secDisplay.GetComponent<Text>().text = lapTime.SecondCount + ".";
-        }
-        if (lapTime.MinuteCount <= 9) {
-            minDisplay.GetComponent<Text>().text = "0" + lapTime.MinuteCount + ".";
-        } else {
-            minDisplay.GetComponent<Text>().text = lapTime.MinuteCount + ".";
-        }
+        LapsDone += 1;
 
-        milDisplay.GetComponent<Text>().text = lapTime.MilliDisplay;
+        //if(lapTime.SecondCount <= 9) {
+        //     secDisplay.GetComponent<Text>().text = "0" + lapTime.SecondCount+ ".";
+        // } else {
+        //     secDisplay.GetComponent<Text>().text = lapTime.SecondCount + ".";
+        // }
+        // if (lapTime.MinuteCount <= 9) {
+        //     minDisplay.GetComponent<Text>().text = "0" + lapTime.MinuteCount + ".";
+        // } else {
+        //     minDisplay.GetComponent<Text>().text = lapTime.MinuteCount + ".";
+        // }
 
-        lapTime.MinuteCount = 0;
-        lapTime.SecondCount = 0;
-        lapTime.MilliCount = 0;
+        // milDisplay.GetComponent<Text>().text = lapTime.MilliDisplay;
+
+        // lapTime.MinuteCount = 0;
+        // lapTime.SecondCount = 0;
+        // lapTime.MilliCount = 0;
+
+        LapCount.GetComponent<Text>().text = "" + LapsDone;
 
         halfLapTrig.SetActive(true);
         lapCompleteTrig.SetActive(false);
