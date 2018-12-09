@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class AuthenticationManager : MonoBehaviour {
 
@@ -20,8 +21,9 @@ public class AuthenticationManager : MonoBehaviour {
     public GameObject fieldUserName;
     public GameObject fieldEmailAddress;
     public GameObject fieldPassword;
-
     public GameObject playerId;
+
+   
 
   
 
@@ -98,8 +100,8 @@ public class AuthenticationManager : MonoBehaviour {
         WWW w = new WWW("https://derpturismo.000webhostapp.com/action_login.php", form);
         yield return w;
 
-        string playerId = w.text;
-        Debug.Log(playerId);
+        string dataId = w.text;
+        Debug.Log(dataId);
 
         if (!string.IsNullOrEmpty(w.error))
             Debug.Log(w.error);
@@ -108,11 +110,17 @@ public class AuthenticationManager : MonoBehaviour {
 
         if (!w.text.Contains("password incorrect") 
             || !w.text.Contains("user not found")){
-            
+            int num = Int32.Parse(dataId);
+            playerId.GetComponent<PlayerId>().setId(num);
+            successfulLogin();
+           
         }    
         else
             popInvalidUnPw.SetActive(true);
-            playerId.GetComponent<PlayerId>().setId(3);
+           
+           
+       
+            
             successfulLogin();
     }
 

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerId : MonoBehaviour {
 
-
+    
     public static PlayerId playerId;
 
+    [SerializeField]
     private int _id;
 
     public void setId(int id) {
