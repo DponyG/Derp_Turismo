@@ -5,32 +5,30 @@ using UnityEngine.UI;
 
 public class AuthenticationManager : MonoBehaviour {
 
+    private string userName;
+
     public GameObject buttonLogin;
-    public GameObject buttonSignUp;
     public GameObject buttonRegister;
+    public GameObject popPanel;
 
     public InputField fieldUserNameText;
     public InputField fieldEmailAddressText;
     public InputField fieldPasswordText;
-    public InputField fieldReenterPasswordText;
 
     public GameObject fieldUserName;
     public GameObject fieldEmailAddress;
     public GameObject fieldPassword;
-    public GameObject fieldReenterPassword;
 
-    public Text userName;
-    public Text textEmail;
-    public Text textPassword;
-    public Text textReenterPassword;
+  
 
     WWWForm form;
        
 
 	// Use this for initialization
 	void Start () {
-        DisplayLoginPanel();
-        buttonRegister.GetComponent<Button>().onClick.AddListener(DisplayRegistrationPanel);
+        //DisplayLoginPanel();
+        popPanel.SetActive(false);
+        buttonRegister.GetComponent<Button>().onClick.AddListener(DisplayUsernamePanel);
     }
 	
 	// Update is called once per frame
@@ -38,29 +36,23 @@ public class AuthenticationManager : MonoBehaviour {
 		
 	}
 
-    public void DisplayLoginPanel() {
+    //public void DisplayLoginPanel() {
 
-        buttonRegister.SetActive(true);
-        buttonLogin.SetActive(true);
-        fieldReenterPassword.SetActive(false);
-        fieldEmailAddress.SetActive(false);
-        fieldPassword.SetActive(false);
-        buttonSignUp.SetActive(false);
+    //    buttonRegister.SetActive(true);
+    //    buttonLogin.SetActive(true);
+    //    fieldEmailAddress.SetActive(false);
+    //    fieldPassword.SetActive(false);
 
+    //}
+
+    public void DisplayUsernamePanel() {
+        popPanel.SetActive(true);
     }
 
-    public void DisplayRegistrationPanel() {
-
-        buttonRegister.SetActive(false);
-        buttonLogin.SetActive(false);
-        fieldEmailAddress.SetActive(true);
-        fieldPassword.SetActive(true); 
-        buttonSignUp.SetActive(true);
-        fieldReenterPassword.SetActive(true);
-
-
+    public void SubmitButtonTapped() {
+        userName = fieldUserNameText.text;
+        popPanel.SetActive(false);
     }
-
     public void LoginButtonTapped() {
     
         StartCoroutine("RequestLogin");
@@ -73,7 +65,7 @@ public class AuthenticationManager : MonoBehaviour {
 
     public IEnumerator RequestLogin() {
         string email = fieldEmailAddressText.text;
-        string password = textPassword.text;
+        string password = fieldPasswordText.text;
         print(email);
         print(password);
 
