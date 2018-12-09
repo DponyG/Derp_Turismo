@@ -11,6 +11,7 @@ public class AuthenticationManager : MonoBehaviour {
     public GameObject buttonRegister;
     public GameObject popPanel;
     public GameObject youAreRegistered;
+    public GameObject Invalid_UN_PW;
 
     public InputField fieldUserNameText;
     public InputField fieldEmailAddressText;
@@ -28,6 +29,7 @@ public class AuthenticationManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         popPanel.SetActive(false);
+        Invalid_UN_PW.SetActive(false);
         youAreRegistered.SetActive(false);
         buttonRegister.GetComponent<Button>().onClick.AddListener(DisplayUsernamePanel);
     }
@@ -63,8 +65,10 @@ public class AuthenticationManager : MonoBehaviour {
         yield return w;
 
 
-        if (!string.IsNullOrEmpty(w.error))
+        if (!string.IsNullOrEmpty(w.error)) {
+            Invalid_UN_PW.SetActive(true);
             Debug.Log(w.error);
+        }
 
         Debug.Log(w.text);
 
