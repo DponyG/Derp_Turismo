@@ -4,7 +4,18 @@ using UnityEngine;
 
 public class PlayerId : MonoBehaviour {
 
+
     public static PlayerId playerId;
+
+    private int _id;
+
+    public void setId(int id) {
+        _id = id;
+        
+    }
+
+    
+    
 
     private void Awake() {
         if(playerId == null) {

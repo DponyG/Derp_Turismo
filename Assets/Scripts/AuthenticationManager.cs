@@ -21,17 +21,23 @@ public class AuthenticationManager : MonoBehaviour {
     public GameObject fieldEmailAddress;
     public GameObject fieldPassword;
 
+    public GameObject playerId;
+
+  
+
   
 
     WWWForm form;
-       
 
-	// Use this for initialization
-	void Start () {
+    
+
+    // Use this for initialization
+    void Start () {
         popPanel.SetActive(false);
         popInvalidUnPw.SetActive(false);
         youAreRegistered.SetActive(false);
         buttonRegister.GetComponent<Button>().onClick.AddListener(DisplayUsernamePanel);
+        playerId = GameObject.Find("GetPlayerId");
     }
 	
 	// Update is called once per frame
@@ -92,19 +98,22 @@ public class AuthenticationManager : MonoBehaviour {
         WWW w = new WWW("https://derpturismo.000webhostapp.com/action_login.php", form);
         yield return w;
 
-        string itemsDataString = w.text;
-        Debug.Log(itemsDataString);
+        string playerId = w.text;
+        Debug.Log(playerId);
 
         if (!string.IsNullOrEmpty(w.error))
             Debug.Log(w.error);
 
         Debug.Log(w.text);
 
-        if (w.text.Contains("login success")){
-            successfulLogin();
+        if (!w.text.Contains("password incorrect") 
+            || !w.text.Contains("user not found")){
+            
         }    
         else
             popInvalidUnPw.SetActive(true);
+            playerId.GetComponent<PlayerId>().setId(3);
+            successfulLogin();
     }
 
     void successfulLogin() {
