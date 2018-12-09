@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AuthenticationManager : MonoBehaviour {
 
@@ -108,6 +109,14 @@ public class AuthenticationManager : MonoBehaviour {
         if (!string.IsNullOrEmpty(w.error))
             Debug.Log(w.error);
 
-        Debug.Log(w.text);     
+        Debug.Log(w.text);
+
+        if (w.text.Contains("login success")){
+            successfulLogin();
+        }     
     }
+
+    void successfulLogin() {
+        SceneManager.LoadScene("SelectMode");
+    }     
 }
