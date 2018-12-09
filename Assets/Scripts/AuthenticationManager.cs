@@ -38,15 +38,6 @@ public class AuthenticationManager : MonoBehaviour {
 		
 	}
 
-    //public void DisplayLoginPanel() {
-
-    //    buttonRegister.SetActive(true);
-    //    buttonLogin.SetActive(true);
-    //    fieldEmailAddress.SetActive(false);
-    //    fieldPassword.SetActive(false);
-
-    //}
-
     public void DisplayUsernamePanel() {
         popPanel.SetActive(true);
         youAreRegistered.SetActive(false);
@@ -87,11 +78,6 @@ public class AuthenticationManager : MonoBehaviour {
         StartCoroutine("RequestLogin");
      
     }
-
-    //public IEnumerator InsertUser() {
-    //    string email = fieldEmailAddress.text;
-    //    string password = textPassword
-    //}
 
     public IEnumerator RequestLogin() {
         string email = fieldEmailAddressText.text;
