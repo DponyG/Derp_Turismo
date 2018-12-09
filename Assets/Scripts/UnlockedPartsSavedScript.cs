@@ -18,6 +18,7 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 	public GameObject prefab;
 
 	public ToggleGroup toggleGroup;
+	WWWForm form;
 
 	// Use this for initialization
 	void Start () {
@@ -68,16 +69,6 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
         yield return w;
 
         string dataId = w.text;
-        Debug.Log(dataId);
-
-        if (!string.IsNullOrEmpty(w.error))
-            Debug.Log(w.error);
-
-        if (!w.text.Contains("password incorrect") 
-            && !w.text.Contains("user not found")){
-            int num = Int32.Parse(dataId);
-            playerId.GetComponent<PlayerId>().setId(num);
-            successfulLogin();
 
 		data = w.text;
 		string[] engineRows = data.Split("\n");
