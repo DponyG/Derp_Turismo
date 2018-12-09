@@ -10,7 +10,7 @@ public class AuthenticationManager : MonoBehaviour {
     public GameObject buttonLogin;
     public GameObject buttonRegister;
     public GameObject popPanel;
-    public GameObject youAreRegisterd;
+    public GameObject youAreRegistered;
 
     public InputField fieldUserNameText;
     public InputField fieldEmailAddressText;
@@ -29,7 +29,7 @@ public class AuthenticationManager : MonoBehaviour {
 	void Start () {
         //DisplayLoginPanel();
         popPanel.SetActive(false);
-        youAreRegisterd.SetActive(false);
+        youAreRegistered.SetActive(false);
         buttonRegister.GetComponent<Button>().onClick.AddListener(DisplayUsernamePanel);
     }
 	
@@ -49,13 +49,13 @@ public class AuthenticationManager : MonoBehaviour {
 
     public void DisplayUsernamePanel() {
         popPanel.SetActive(true);
-        youAreRegisterd.SetActive(false);
+        youAreRegistered.SetActive(false);
     }
 
     public void SubmitButtonTapped() {
 
         popPanel.SetActive(false);
-        youAreRegisterd.SetActive(true);
+        youAreRegistered.SetActive(true);
 
         StartCoroutine("RequestInsert");
     }
