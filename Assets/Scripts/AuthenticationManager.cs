@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class AuthenticationManager : MonoBehaviour {
 
-    private string userName;
 
     public GameObject buttonLogin;
     public GameObject buttonRegister;
@@ -53,13 +52,39 @@ public class AuthenticationManager : MonoBehaviour {
     }
 
     public void SubmitButtonTapped() {
-        userName = fieldUserNameText.text;
+
         popPanel.SetActive(false);
         youAreRegisterd.SetActive(true);
+
+        StartCoroutine("RequestInsert");
     }
+
+    public IEnumerator RequestInsert() {
+        string email = fieldEmailAddressText.text;
+        string password = fieldPasswordText.text;
+        string username = fieldUserNameText.text;
+        form = new WWWForm();
+        form.AddField("email", email);
+        form.AddField("password", password);
+        form.AddField("username", username);
+
+        WWW w = new WWW("https://derpturismo.000webhostapp.com/update_login.php", form);
+        yield return w;
+
+
+        if (!string.IsNullOrEmpty(w.error))
+            Debug.Log(w.error);
+
+        Debug.Log(w.text);
+
+
+
+    }
+
     public void LoginButtonTapped() {
-    
+
         StartCoroutine("RequestLogin");
+     
     }
 
     //public IEnumerator InsertUser() {
