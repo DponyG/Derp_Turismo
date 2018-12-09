@@ -54,7 +54,7 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 		GameObject newEngine; 
 		newEngine = (GameObject)Instantiate(prefab, transform);
 		newEngine.GetComponent<Text>().text = partName + s + "	Cost: $" + UnityEngine.Random.Range(1,100).ToString();
-		//newEngine.GetComponent<Toggle>().group = toggleGroup;
+		newEngine.GetComponentInChildren<Toggle>().group = toggleGroup;
 		newEngine.name = partName + s;
 	}
 }
