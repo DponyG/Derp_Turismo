@@ -14,7 +14,7 @@ public class ModeSelection : MonoBehaviour {
     void Start () {
 		garageButton.onClick.AddListener(delegate {Navigate("GarageScene"); });
 		raceButton.onClick.AddListener(delegate {Navigate("RaceSelectionScene"); });
-        backButton.onClick.AddListener(delegate { Navigate("Menu"); });
+        backButton.onClick.AddListener(delegate { Navigate("Login_Screen"); });
     }
 	
 	

@@ -109,7 +109,7 @@ public class AuthenticationManager : MonoBehaviour {
         Debug.Log(w.text);
 
         if (!w.text.Contains("password incorrect") 
-            || !w.text.Contains("user not found")){
+            && !w.text.Contains("user not found")){
             int num = Int32.Parse(dataId);
             playerId.GetComponent<PlayerId>().setId(num);
             successfulLogin();
@@ -117,11 +117,6 @@ public class AuthenticationManager : MonoBehaviour {
         }    
         else
             popInvalidUnPw.SetActive(true);
-           
-           
-       
-            
-            successfulLogin();
     }
 
     void successfulLogin() {
