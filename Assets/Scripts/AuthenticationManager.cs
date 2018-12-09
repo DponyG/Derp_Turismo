@@ -38,15 +38,6 @@ public class AuthenticationManager : MonoBehaviour {
 		
 	}
 
-    //public void DisplayLoginPanel() {
-
-    //    buttonRegister.SetActive(true);
-    //    buttonLogin.SetActive(true);
-    //    fieldEmailAddress.SetActive(false);
-    //    fieldPassword.SetActive(false);
-
-    //}
-
     public void DisplayUsernamePanel() {
         popPanel.SetActive(true);
         youAreRegistered.SetActive(false);
