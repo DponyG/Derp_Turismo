@@ -27,7 +27,6 @@ public class AuthenticationManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //DisplayLoginPanel();
         popPanel.SetActive(false);
         youAreRegistered.SetActive(false);
         buttonRegister.GetComponent<Button>().onClick.AddListener(DisplayUsernamePanel);
