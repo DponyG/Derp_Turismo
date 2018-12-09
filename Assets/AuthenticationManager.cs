@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class AuthenticationManager : MonoBehaviour {
 
     public GameObject buttonJoinGame;
-    public GameObject buttonRegister;
+    public GameObject buttonLogin;
+    public GameObject buttonSignUp;
     public GameObject mainMenu;
 
     public GameObject fieldUserName;
@@ -33,8 +34,18 @@ public class AuthenticationManager : MonoBehaviour {
 	}
 
     public void DisplayLoginPanel() {
-        buttonRegister.SetActive(false);
+        buttonSignUp.SetActive(false);
+        buttonLogin.SetActive(true);
         fieldReenterPassword.SetActive(false);
+    }
+
+    public void DisplayRegistrationPanel() {
+
+        buttonLogin.SetActive(false);
+        buttonSignUp.SetActive(true);
+        fieldReenterPassword.SetActive(true);
+       
+
     }
 
     public void LoginButtonTapped() {
