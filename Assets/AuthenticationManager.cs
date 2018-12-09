@@ -10,7 +10,7 @@ public class AuthenticationManager : MonoBehaviour {
     public GameObject mainMenu;
 
     public GameObject fieldUserName;
-    public GameObject fieldEmailAddress;
+    public InputField fieldEmailAddress;
     public GameObject fieldPassword;
     public GameObject fieldReenterPassword;
 
@@ -43,7 +43,7 @@ public class AuthenticationManager : MonoBehaviour {
     }
 
     public IEnumerator RequestLogin() {
-        string email = textEmail.text;
+        string email = fieldEmailAddress.text;
         string password = textPassword.text;
         print(email);
         print(password);
@@ -52,7 +52,7 @@ public class AuthenticationManager : MonoBehaviour {
         form.AddField("email", email);
         form.AddField("password", password);
 
-        WWW w = new WWW("http://localhost/unity/action_login.php", form);
+        WWW w = new WWW("https://derpturismo.000webhostapp.com/action_login.php", form);
         yield return w;
 
         if (!string.IsNullOrEmpty(w.error))

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44658786, g: 0.4964227, b: 0.5748251, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1195,7 +1195,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.025009155}
+  m_AnchoredPosition: {x: 0, y: -0.025024414}
   m_SizeDelta: {x: 0, y: -0.049988}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1418501240
@@ -1247,7 +1247,7 @@ MonoBehaviour:
   buttonRegister: {fileID: 396153776}
   mainMenu: {fileID: 0}
   fieldUserName: {fileID: 0}
-  fieldEmailAddress: {fileID: 1866282960}
+  fieldEmailAddress: {fileID: 1866282962}
   fieldPassword: {fileID: 1965675645}
   fieldReenterPassword: {fileID: 364361034}
   userName: {fileID: 0}
@@ -1477,16 +1477,16 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1866282963}
+  m_TargetGraphic: {fileID: 1916990812}
   m_TextComponent: {fileID: 1916990812}
   m_Placeholder: {fileID: 1745301567}
-  m_ContentType: 0
+  m_ContentType: 6
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 7
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 0
+  m_CharacterValidation: 5
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
@@ -1604,7 +1604,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 0
     m_HorizontalOverflow: 1
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
 --- !u!222 &1916990813
