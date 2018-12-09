@@ -11,6 +11,7 @@ public class AuthenticationManager : MonoBehaviour {
     public GameObject buttonRegister;
     public GameObject popPanel;
     public GameObject youAreRegistered;
+    public GameObject popInvalidUnPw;
 
     public InputField fieldUserNameText;
     public InputField fieldEmailAddressText;
@@ -28,6 +29,7 @@ public class AuthenticationManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         popPanel.SetActive(false);
+        popInvalidUnPw.SetActive(false);
         youAreRegistered.SetActive(false);
         buttonRegister.GetComponent<Button>().onClick.AddListener(DisplayUsernamePanel);
     }
@@ -61,7 +63,6 @@ public class AuthenticationManager : MonoBehaviour {
 
         WWW w = new WWW("https://derpturismo.000webhostapp.com/update_login.php", form);
         yield return w;
-
 
         if (!string.IsNullOrEmpty(w.error))
             Debug.Log(w.error);
@@ -101,7 +102,9 @@ public class AuthenticationManager : MonoBehaviour {
 
         if (w.text.Contains("login success")){
             successfulLogin();
-        }     
+        }    
+        else
+            popInvalidUnPw.SetActive(true);
     }
 
     void successfulLogin() {
