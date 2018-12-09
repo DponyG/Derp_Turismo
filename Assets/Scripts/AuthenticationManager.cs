@@ -117,11 +117,6 @@ public class AuthenticationManager : MonoBehaviour {
         }    
         else
             popInvalidUnPw.SetActive(true);
-           
-           
-       
-            
-            successfulLogin();
     }
 
     void successfulLogin() {
