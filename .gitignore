@@ -34,3 +34,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# files
+Bodies.txt
+Engines.txt
+Tires.txt
