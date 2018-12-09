@@ -6,17 +6,25 @@ using UnityEngine.UI;
 public class RandomColor : MonoBehaviour {
 
 	public Text text;
-
+	float i =0.0f;
+	float rate = 1.0f;
+	Color colorStart;
+	Color colorEnd;
 	// Use this for initialization
 	void Start () {
-		
+		colorStart = UnityEngine.Random.ColorHSV();
+		colorEnd = UnityEngine.Random.ColorHSV();
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-		float red = Random.Range(0.0f, 1.0f);
-		float green = Random.Range(0.0f, 1.0f);
-		float blue = Random.Range(0.0f, 1.0f);
-		text.color = new Color (red, green, blue);
+
+	void Update() {
+		i+= Time.deltaTime * rate;
+		text.color = Color.Lerp(colorStart, colorEnd, i);
+
+		if (i >= 1){
+			i=0;
+			colorStart = text.color;
+			colorEnd = UnityEngine.Random.ColorHSV();
+
+		}
 	}
 }
