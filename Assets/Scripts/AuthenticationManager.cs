@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class AuthenticationManager : MonoBehaviour {
 
-    public GameObject buttonJoinGame;
     public GameObject buttonLogin;
     public GameObject buttonSignUp;
-    public GameObject mainMenu;
     public GameObject buttonRegister;
 
+    public InputField fieldUserNameText;
+    public InputField fieldEmailAddressText;
+    public InputField fieldPasswordText;
+    public InputField fieldReenterPasswordText;
+
     public GameObject fieldUserName;
-    public InputField fieldEmailAddress;
+    public GameObject fieldEmailAddress;
     public GameObject fieldPassword;
     public GameObject fieldReenterPassword;
 
@@ -23,14 +25,13 @@ public class AuthenticationManager : MonoBehaviour {
     public Text textReenterPassword;
 
     WWWForm form;
-
-
        
 
 	// Use this for initialization
 	void Start () {
         DisplayLoginPanel();
-	}
+        buttonRegister.GetComponent<Button>().onClick.AddListener(DisplayRegistrationPanel);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -38,18 +39,25 @@ public class AuthenticationManager : MonoBehaviour {
 	}
 
     public void DisplayLoginPanel() {
-        buttonSignUp.SetActive(false);
+
         buttonRegister.SetActive(true);
         buttonLogin.SetActive(true);
         fieldReenterPassword.SetActive(false);
+        fieldEmailAddress.SetActive(false);
+        fieldPassword.SetActive(false);
+        buttonSignUp.SetActive(false);
+
     }
 
     public void DisplayRegistrationPanel() {
 
+        buttonRegister.SetActive(false);
         buttonLogin.SetActive(false);
+        fieldEmailAddress.SetActive(true);
+        fieldPassword.SetActive(true); 
         buttonSignUp.SetActive(true);
         fieldReenterPassword.SetActive(true);
-       
+
 
     }
 
@@ -64,7 +72,7 @@ public class AuthenticationManager : MonoBehaviour {
     //}
 
     public IEnumerator RequestLogin() {
-        string email = fieldEmailAddress.text;
+        string email = fieldEmailAddressText.text;
         string password = textPassword.text;
         print(email);
         print(password);
@@ -79,13 +87,6 @@ public class AuthenticationManager : MonoBehaviour {
         if (!string.IsNullOrEmpty(w.error))
             Debug.Log(w.error);
 
-        Debug.Log(w.text);
-        if (w.text.Contains("login success")){
-            successfulLogin();
-        }     
-    }
-
-    void successfulLogin() {
-        SceneManager.LoadScene("SelectMode");
+        Debug.Log(w.text);     
     }
 }
