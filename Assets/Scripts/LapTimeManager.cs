@@ -15,16 +15,34 @@ public class LapTimeManager : MonoBehaviour {
     public GameObject milliBox;
 
     public GameObject LapCompleteTrigger;
+    public GameObject playerId;
+    private string playerID;
 
-  
+
+    WWWForm form;
+
+
+
+    void Awake() {
+        if (Application.isEditor) {
+            playerID = "1";
+        } else {
+            playerId = GameObject.Find("GetPlayerId");
+            playerID = playerId.GetComponent<PlayerId>().getId().ToString();
+        }
+    }
 
     // Use this for initialization
     void Start () {
-      
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        print(playerID);
+        StartCoroutine("RequestInsert");
+        print(playerID);
+    }
+
+    
+
+    // Update is called once per frame
+    void Update () {
         if (LapCompleteTrigger.GetComponent<LapComplete>().getLaps() < 1) {
 
 
@@ -95,6 +113,29 @@ public class LapTimeManager : MonoBehaviour {
             milliDisplay = value;
         }
     }
+
+    public IEnumerator RequestInsert() {
+
+        print("TESTING TESTING TESTING");
+       
+       
+        form = new WWWForm();
+        form.AddField("playerId", playerID);
+     
+        WWW w = new WWW("https://derpturismo.000webhostapp.com/get_time.php", form);
+        yield return w;
+
+        if (!string.IsNullOrEmpty(w.error))
+            Debug.Log(w.error);
+
+        print("TESTING TESTING34234234 TESTING");
+
+        Debug.Log(w);
+
+    }
+
+
+
 
 
 }

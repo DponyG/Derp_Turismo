@@ -10,7 +10,7 @@ public class CountDown : MonoBehaviour {
     public AudioSource getReady;
     public AudioSource goAudio;
     public GameObject lapTimer;
-    public GameObject test;
+    //public GameObject test;
  
    
 

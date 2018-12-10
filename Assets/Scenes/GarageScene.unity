@@ -4672,7 +4672,7 @@ MonoBehaviour:
   currDropDown: {fileID: 1988166755}
   savebutton: {fileID: 2057277743}
   deleteButton: {fileID: 1189556505}
-  newCarName: {fileID: 0}
+  newCarName: {fileID: 1564911519}
 --- !u!1 &2007479618
 GameObject:
   m_ObjectHideFlags: 0

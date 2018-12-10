@@ -8,8 +8,8 @@ public class RandomColor : MonoBehaviour {
 	public Text text;
 	float i =0.0f;
 	float rate = 1.0f;
-	Color colorStart;
-	Color colorEnd;
+	UnityEngine.Color colorStart;
+	UnityEngine.Color colorEnd;
 	// Use this for initialization
 	void Start () {
 		colorStart = UnityEngine.Random.ColorHSV();
@@ -18,7 +18,7 @@ public class RandomColor : MonoBehaviour {
 
 	void Update() {
 		i+= Time.deltaTime * rate;
-		text.color = Color.Lerp(colorStart, colorEnd, i);
+		text.color = UnityEngine.Color.Lerp(colorStart, colorEnd, i);
 
 		if (i >= 1){
 			i=0;

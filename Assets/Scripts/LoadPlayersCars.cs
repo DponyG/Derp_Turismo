@@ -39,6 +39,7 @@ public class LoadPlayersCars : MonoBehaviour {
         deleteButton.GetComponent<Button>().onClick.AddListener(deleteCarButton);
 
         StartCoroutine("getCars");
+       
 	}
 
 	public IEnumerator getCars() {
@@ -174,7 +175,7 @@ public class LoadPlayersCars : MonoBehaviour {
         
     }
 
-     IEnumerator deleteCar() {
+    IEnumerator deleteCar() {
         string name = currDropDown.options[currDropDown.value].text;
         form = new WWWForm();
         form.AddField("playerId", playerID);
