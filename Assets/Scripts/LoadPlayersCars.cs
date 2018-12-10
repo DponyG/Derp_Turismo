@@ -54,20 +54,23 @@ public class LoadPlayersCars : MonoBehaviour {
 
 	public IEnumerator getCarValues(string id, string name) {
 		form = new WWWForm();
-        form.AddField("playerId", id);
+        form.AddField("playerId", Int32.Parse(id));
 		form.AddField("car_name", name);
 
         WWW w = new WWW("https://derpturismo.000webhostapp.com/get_car_values.php", form);
         yield return w;
 
-		if (!string.IsNullOrEmpty(w.error))
+		if (string.IsNullOrEmpty(w.error))
             Debug.Log(w.error);
-
+        Debug.Log(w.text);
 		string data = w.text;
 		string[] car = data.Split(',');
-		if (car != null && car.Length > 0) {
-			populateToggles(car);
-		}
+        if (car != null && car.Length > 0)
+        {
+            //populateToggles(car);
+        }
+        else
+            Debug.Log("Error getting Car data.");
 	}
 
 	void populateCar(string[] car){
@@ -81,9 +84,10 @@ public class LoadPlayersCars : MonoBehaviour {
     }
 
 	void populateToggles(string[] car) {
-		string engineTitle = "Engine" + car[5];
+		string engineTitle = "Engine " + car[4];
+        //Debug.Log(engineTitle);
 		engineToggle = GameObject.Find(engineTitle);
-		engineToggle.GetComponent<Toggle>().isOn = true;
+		//engineToggle.GetComponent<Toggle>().isOn = true;
 	}
 
 	
