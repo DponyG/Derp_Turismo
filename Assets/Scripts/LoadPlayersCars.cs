@@ -141,10 +141,11 @@ public class LoadPlayersCars : MonoBehaviour {
     }
 
     public IEnumerator SaveCar(string tires, string engine, string body) {
+        string oldcarname = currDropDown.options[currDropDown.value].text;
         form = new WWWForm();
         form.AddField("playerid", playerID);
-        //form.AddField("oldname", )
-        //form.AddField("name", carname);
+        form.AddField("oldname", oldcarname);
+        //form.AddField("name", name);
         form.AddField("tires", tires);
         form.AddField("engine", engine);
         form.AddField("body", body);
