@@ -11,6 +11,8 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 
 	public string fileName;
 	public string partName;
+
+	private string playerID;
 	public string directory = "~/";
 
 	public GameObject player;
@@ -18,18 +20,19 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 	public GameObject prefab;
 
 	public ToggleGroup toggleGroup;
+	private GameObject playerId;
 	WWWForm form;
+
+
+	void Awake() {
+		playerId = GameObject.Find("GetPlayerId");
+		
+		playerID = playerId.GetComponent<PlayerId>().getId().ToString();
+	}
 
 	// Use this for initialization
 	void Start () {
-		for (int i = 0; i < UnityEngine.Random.Range(1,10); i++) {
-			saveNewPart(i);
-		}
-
-		string[] parts = readParts();
-		foreach (string s in parts) {
-			PopulatePart(s);
-		}
+		getParts();
 	}
 	
 	// Update is called once per frame
@@ -37,50 +40,32 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 		
 	}
 
-
-	void saveNewPart(int partID) {
-		if (!File.Exists(fileName)){
-			File.WriteAllText(fileName, partID.ToString() + Environment.NewLine);
-		}
-		else {
-			File.AppendAllText(fileName, partID.ToString() + Environment.NewLine);
-		}
-	}
-
-	string[] readParts() {
-		return File.ReadAllLines(fileName);
-	}
-
-	void PopulatePart(string s) {
-		GameObject newEngine; 
+	void populatePart(string[] s) {
+		GameObject newEngine;
 		newEngine = (GameObject)Instantiate(prefab, transform);
-		newEngine.GetComponent<Text>().text = partName + s + "	Cost: $" + UnityEngine.Random.Range(1,100).ToString() 
-											+ "	Stat: " + UnityEngine.Random.Range(1,25).ToString();
+		newEngine.GetComponent<Text>().text = "Name: " + s[2] + " Cost: $" + s[1]
+											+ " Stat: " + s[3];
 		newEngine.GetComponentInChildren<Toggle>().group = toggleGroup;
-		newEngine.name = partName + s;
+		newEngine.name = s[2];
 	}
+
 
 	public IEnumerator getParts() {
 
         form = new WWWForm();
-        form.AddField("playerId", playerId);
+        form.AddField("playerId", playerID);
 
         WWW w = new WWW("https://derpturismo.000webhostapp.com/get_engines.php", form);
         yield return w;
 
-        string dataId = w.text;
-
-		data = w.text;
-		string[] engineRows = data.Split("\n");
+		string data = w.text;
+		string[] engineRows = data.Split(';');
 		foreach (string s in engineRows) {
-			string[] engine = s.Split(",");
-			// id
-			// cost 
-			// name 
-			// horsepower 
-			// partId
+			string[] engine = s.Split(',');
+			populatePart(engine);
 		}
 		 
-    	}
-	}
+    }
+
+
 }
