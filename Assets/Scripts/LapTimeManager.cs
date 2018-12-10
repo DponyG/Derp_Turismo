@@ -14,6 +14,8 @@ public class LapTimeManager : MonoBehaviour {
     public GameObject secondBox;
     public GameObject milliBox;
 
+    public GameObject LapCompleteTrigger;
+
   
 
     // Use this for initialization
@@ -23,31 +25,34 @@ public class LapTimeManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        MilliCount += Time.deltaTime * 10;
-        MilliDisplay = MilliCount.ToString("F0");
-        milliBox.GetComponent<Text>().text = "" + MilliDisplay;
+        if (LapCompleteTrigger.GetComponent<LapComplete>().getLaps() < 1) {
 
-        if (MilliCount >= 10) {
-            MilliCount = 0;
-            SecondCount++;
-        }
 
-        if (SecondCount <= 9) {
-            secondBox.GetComponent<Text>().text = "0" + SecondCount + ".";
-        } else {
-            secondBox.GetComponent<Text>().text = SecondCount + ".";
-        }
+            MilliCount += Time.deltaTime * 10;
+            MilliDisplay = MilliCount.ToString("F0");
+            milliBox.GetComponent<Text>().text = "" + MilliDisplay;
 
-        if (SecondCount >= 60) {
-            SecondCount = 0;
-            MinuteCount++;
-        }
-        
-        if(MinuteCount <= 9) {
-            minuteBox.GetComponent<Text>().text = "0" + MinuteCount + ".";
-        }
-        else {
-            minuteBox.GetComponent<Text>().text = MinuteCount + ".";
+            if (MilliCount >= 10) {
+                MilliCount = 0;
+                SecondCount++;
+            }
+
+            if (SecondCount <= 9) {
+                secondBox.GetComponent<Text>().text = "0" + SecondCount + ".";
+            } else {
+                secondBox.GetComponent<Text>().text = SecondCount + ".";
+            }
+
+            if (SecondCount >= 60) {
+                SecondCount = 0;
+                MinuteCount++;
+            }
+
+            if (MinuteCount <= 9) {
+                minuteBox.GetComponent<Text>().text = "0" + MinuteCount + ".";
+            } else {
+                minuteBox.GetComponent<Text>().text = MinuteCount + ".";
+            }
         }
     }
 

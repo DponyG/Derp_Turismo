@@ -9,7 +9,7 @@ public class PlayerId : MonoBehaviour {
 
     [SerializeField]
     private int _id;
-
+   
     public void setId(int id) {
         _id = id;
         
