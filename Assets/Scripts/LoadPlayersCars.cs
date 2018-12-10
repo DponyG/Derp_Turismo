@@ -28,8 +28,8 @@ public class LoadPlayersCars : MonoBehaviour {
 	}
 
 	void Start () {
-        savebutton.GetComponent<Button>().onClick.AddListener(saveCar);
-		StartCoroutine("getCars"); 
+        savebutton.GetComponent<Button>().onClick.AddListener(getSaveCarData);
+		StartCoroutine("getCars");
 	}
 
 	public IEnumerator getCars() {
@@ -99,9 +99,41 @@ public class LoadPlayersCars : MonoBehaviour {
         tireToggle.GetComponentInChildren<Toggle>().isOn = true;
     }
 
-    void saveCar()
+    void getSaveCarData()
     {
-        Debug.Log("YOU CLICKED ME");
+        ToggleGroup tireGroup, engineGroup, bodyGroup;
+        string currentTire = "";
+        string currentEngine = "";
+        string currentBody = "";
+        tireGroup = GameObject.Find("TiresContent").GetComponent<ToggleGroup>();
+        engineGroup = GameObject.Find("EnginesContent").GetComponent<ToggleGroup>();
+        bodyGroup = GameObject.Find("BodiesContent").GetComponent<ToggleGroup>();
+        foreach (Toggle t in tireGroup.ActiveToggles()) {
+            currentTire = (t.transform.parent.name);
+            currentTire = Regex.Replace(currentTire, "[^0-9.]", "");
+        }
+        foreach (Toggle t in engineGroup.ActiveToggles()){
+            currentEngine = (t.transform.parent.name);
+            currentEngine = Regex.Replace(currentEngine, "[^0-9.]", "");
+        }
+        foreach (Toggle t in bodyGroup.ActiveToggles()) {
+            currentBody = (t.transform.parent.name);
+            currentBody = Regex.Replace(currentBody, "[^0-9.]", "");
+        }
+        Debug.Log(currentTire + currentEngine + currentBody);
+        StartCoroutine(SaveCar(currentTire, currentEngine, currentBody));
     }
-	
+
+    public IEnumerator SaveCar(string tires, string engine, string body) {
+        form = new WWWForm();
+        form.AddField("playerid", playerID);
+        //form.AddField("oldname", )
+        //form.AddField("name", carname);
+        form.AddField("tires", tires);
+        form.AddField("engine", engine);
+        form.AddField("body", body);
+
+        WWW w = new WWW("https://derpturismo.000webhostapp.com/save_cars.php", form);
+        yield return w;
+    }
 }
