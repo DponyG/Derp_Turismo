@@ -9,13 +9,7 @@ using System.Text;
 
 public class UnlockedPartsSavedScript : MonoBehaviour {
 
-	public string fileName;
-	public string partName;
-
 	private string playerID;
-	public string directory = "~/";
-
-	public GameObject player;
 
 	public GameObject prefab;
 
@@ -25,9 +19,13 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 
 
 	void Awake() {
-		playerId = GameObject.Find("GetPlayerId");
-		
-		playerID = playerId.GetComponent<PlayerId>().getId().ToString();
+		if (Application.isEditor) {
+			playerID = "1";
+		}
+		else {
+			playerId = GameObject.Find("GetPlayerId");
+			playerID = playerId.GetComponent<PlayerId>().getId().ToString();
+		}
 	}
 
 	// Use this for initialization
@@ -59,9 +57,11 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
         yield return w;
 
 		string data = w.text;
+		Debug.Log(w.text);
 		string[] engineRows = data.Split(';');
 		foreach (string s in engineRows) {
 			string[] engine = s.Split(',');
+			Debug.Log(engine.ToString());
 			populatePart(engine);
 		}
 		 
