@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Text.RegularExpressions;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LoadPlayersCars : MonoBehaviour {
 
@@ -123,6 +124,7 @@ public class LoadPlayersCars : MonoBehaviour {
     void deleteCarButton() {
         StartCoroutine("deleteCar");
         
+        
     }
 
      IEnumerator deleteCar() {
@@ -134,9 +136,12 @@ public class LoadPlayersCars : MonoBehaviour {
         WWW w = new WWW("https://derpturismo.000webhostapp.com/delete_car.php", form);
         yield return w;
 
+
         if (!string.IsNullOrEmpty(w.error))
             Debug.Log(w.error);
         Debug.Log(name);
+        SceneManager.LoadScene("GarageScene");
+   
     }
 	
 }
