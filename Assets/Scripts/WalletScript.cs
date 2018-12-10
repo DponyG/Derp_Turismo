@@ -17,4 +17,7 @@ public class WalletScript : MonoBehaviour {
 	void Update () {
 		
 	}
+
+
+	
 }
