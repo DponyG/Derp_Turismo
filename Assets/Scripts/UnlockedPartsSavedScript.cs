@@ -13,7 +13,12 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 
 	public GameObject prefab;
 
-	public ToggleGroup toggleGroup;
+	public ToggleGroup toggleGroupBodies;
+	public Transform bodiesTransform;
+	public ToggleGroup toggleGroupTires;
+	public Transform tiresTransform;
+	public ToggleGroup toggleGroupEngines;
+	public Transform enginesTransform;
 	private GameObject playerId;
 	WWWForm form;
 
@@ -30,7 +35,9 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine("getParts");
+		StartCoroutine("getEngines");
+		StartCoroutine("getTires");
+		StartCoroutine("getBodies");
 	}
 	
 	// Update is called once per frame
@@ -38,20 +45,46 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 		
 	}
 
-	void populatePart(string[] s) {
-		GameObject newEngine;
-		newEngine = (GameObject)Instantiate(prefab, transform);
+
+
+	void populateEngine(string[] s) {
+		GameObject newPart;
+		newPart = (GameObject)Instantiate(prefab, enginesTransform);
 		foreach(string ss in s){
 			Debug.Log(ss);
 		}
-		newEngine.GetComponent<Text>().text = "Name: " + s[2] + " Cost: $" + s[1]
+		newPart.GetComponent<Text>().text = "Name: " + s[2] + " Cost: $" + s[1]
 											+ " Stat: " + s[3];
-		newEngine.GetComponentInChildren<Toggle>().group = toggleGroup;
-		newEngine.name = s[2];
+		newPart.GetComponentInChildren<Toggle>().group = toggleGroupEngines;
+		newPart.name = s[2];
+	}
+
+	void populateTire(string[] s) {
+		GameObject newPart;
+		newPart = (GameObject)Instantiate(prefab, tiresTransform);
+		foreach(string ss in s){
+			Debug.Log(ss);
+		}
+		newPart.GetComponent<Text>().text = "Name: " + s[2] + " Cost: $" + s[1]
+											+ " Stat: " + s[3];
+		newPart.GetComponentInChildren<Toggle>().group = toggleGroupTires;
+		newPart.name = s[2];
+	}
+
+	void populateBody(string[] s) {
+		GameObject newPart;
+		newPart = (GameObject)Instantiate(prefab, bodiesTransform);
+		foreach(string ss in s){
+			Debug.Log(ss);
+		}
+		newPart.GetComponent<Text>().text = "Name: " + s[2] + " Cost: $" + s[1]
+											+ " Stat: " + s[3];
+		newPart.GetComponentInChildren<Toggle>().group = toggleGroupBodies;
+		newPart.name = s[2];
 	}
 
 
-	public IEnumerator getParts() {
+	public IEnumerator getEngines() {
 
         form = new WWWForm();
         // form.AddField("playerId", playerID);
@@ -67,7 +100,51 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 		foreach (string s in engineRows) {
 			if (!string.IsNullOrEmpty(s)) {
 				string[] engine = s.Split(',');
-				populatePart(engine);
+				populateEngine(engine);
+			}
+		}
+		 
+    }
+
+	public IEnumerator getTires() {
+
+        form = new WWWForm();
+        // form.AddField("playerId", playerID);
+
+        WWW w = new WWW("https://derpturismo.000webhostapp.com/get_tires.php", form);
+        yield return w;
+
+		if (!string.IsNullOrEmpty(w.error))
+            Debug.Log(w.error);
+
+		string data = w.text;
+		string[] tireRows = data.Split(';');
+		foreach (string s in tireRows) {
+			if (!string.IsNullOrEmpty(s)) {
+				string[] tire = s.Split(',');
+				populateTire(tire);
+			}
+		}
+		 
+    }
+
+	public IEnumerator getBodies() {
+
+        form = new WWWForm();
+        // form.AddField("playerId", playerID);
+
+        WWW w = new WWW("https://derpturismo.000webhostapp.com/get_bodies.php", form);
+        yield return w;
+
+		if (!string.IsNullOrEmpty(w.error))
+            Debug.Log(w.error);
+
+		string data = w.text;
+		string[] bodyRows = data.Split(';');
+		foreach (string s in bodyRows) {
+			if (!string.IsNullOrEmpty(s)) {
+				string[] body = s.Split(',');
+				populateBody(body);
 			}
 		}
 		 
