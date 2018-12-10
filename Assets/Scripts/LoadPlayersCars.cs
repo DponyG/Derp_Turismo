@@ -138,7 +138,7 @@ public class LoadPlayersCars : MonoBehaviour {
             currentBody = (t.transform.parent.name);
             currentBody = Regex.Replace(currentBody, "[^0-9.]", "");
         }
-        Debug.Log(currentTire + currentEngine + currentBody);
+        //Debug.Log(currentTire + currentEngine + currentBody);
         StartCoroutine(SaveCar(currentTire, currentEngine, currentBody));
     }
 
@@ -146,7 +146,7 @@ public class LoadPlayersCars : MonoBehaviour {
 
         string _newCarName = newCarName.GetComponent<InputField>().text;
         string oldcarname = currDropDown.options[currDropDown.value].text;
-        if (_newCarName == null) {
+        if (_newCarName == "") {
             _newCarName = oldcarname;
         }
         
@@ -160,7 +160,7 @@ public class LoadPlayersCars : MonoBehaviour {
 
         WWW w = new WWW("https://derpturismo.000webhostapp.com/save_cars.php", form);
         yield return w;
-
+        Debug.Log(w.text);
         if (!string.IsNullOrEmpty(w.error))
             Debug.Log(w.error);
 
