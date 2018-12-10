@@ -50,37 +50,28 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 	void populateEngine(string[] s) {
 		GameObject newPart;
 		newPart = (GameObject)Instantiate(prefab, enginesTransform);
-		foreach(string ss in s){
-			Debug.Log(ss);
-		}
-		newPart.GetComponent<Text>().text = "Name: " + s[2] + " Cost: $" + s[1]
+		newPart.GetComponent<Text>().text = s[2] + " Cost: $" + s[1]
 											+ " Stat: " + s[3];
 		newPart.GetComponentInChildren<Toggle>().group = toggleGroupEngines;
-		newPart.name = s[2];
+		newPart.name = "Engine " + s[0];
 	}
 
 	void populateTire(string[] s) {
 		GameObject newPart;
 		newPart = (GameObject)Instantiate(prefab, tiresTransform);
-		foreach(string ss in s){
-			Debug.Log(ss);
-		}
-		newPart.GetComponent<Text>().text = "Name: " + s[2] + " Cost: $" + s[1]
+		newPart.GetComponent<Text>().text = s[2] + " Cost: $" + s[1]
 											+ " Stat: " + s[3];
 		newPart.GetComponentInChildren<Toggle>().group = toggleGroupTires;
-		newPart.name = s[2];
+		newPart.name = "Tire " + s[0];
 	}
 
 	void populateBody(string[] s) {
 		GameObject newPart;
 		newPart = (GameObject)Instantiate(prefab, bodiesTransform);
-		foreach(string ss in s){
-			Debug.Log(ss);
-		}
-		newPart.GetComponent<Text>().text = "Name: " + s[2] + " Cost: $" + s[1]
+		newPart.GetComponent<Text>().text = s[2] + " Cost: $" + s[1]
 											+ " Stat: " + s[3];
 		newPart.GetComponentInChildren<Toggle>().group = toggleGroupBodies;
-		newPart.name = s[2];
+		newPart.name = "Body " + s[0];
 	}
 
 
