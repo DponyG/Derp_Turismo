@@ -17,6 +17,7 @@ public class LoadPlayersCars : MonoBehaviour {
     public GameObject savebutton;
     public GameObject deleteButton;
 
+    public GameObject newCarName;
     private string car_name;
   
 
@@ -117,6 +118,7 @@ public class LoadPlayersCars : MonoBehaviour {
 
     void getSaveCarData()
     {
+        
         ToggleGroup tireGroup, engineGroup, bodyGroup;
         string currentTire = "";
         string currentEngine = "";
@@ -141,17 +143,29 @@ public class LoadPlayersCars : MonoBehaviour {
     }
 
     public IEnumerator SaveCar(string tires, string engine, string body) {
+
+        string _newCarName = newCarName.GetComponent<InputField>().text;
         string oldcarname = currDropDown.options[currDropDown.value].text;
+        if (_newCarName == null) {
+            _newCarName = oldcarname;
+        }
+        
         form = new WWWForm();
         form.AddField("playerid", playerID);
         form.AddField("oldname", oldcarname);
-        //form.AddField("name", name);
+        form.AddField("name", _newCarName);
         form.AddField("tires", tires);
         form.AddField("engine", engine);
         form.AddField("body", body);
 
         WWW w = new WWW("https://derpturismo.000webhostapp.com/save_cars.php", form);
         yield return w;
+
+        if (!string.IsNullOrEmpty(w.error))
+            Debug.Log(w.error);
+
+        SceneManager.LoadScene("GarageScene");
+
     }
 
     void deleteCarButton() {
