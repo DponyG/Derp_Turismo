@@ -27,7 +27,7 @@ public class LoadPlayersCars : MonoBehaviour {
 	}
 
 	void Start () {
-		StartCoroutine("getCars");
+		StartCoroutine("getCars"); 
 	}
 
 	public IEnumerator getCars() {
@@ -54,20 +54,20 @@ public class LoadPlayersCars : MonoBehaviour {
 
 	public IEnumerator getCarValues(string id, string name) {
 		form = new WWWForm();
-        form.AddField("playerId", Int32.Parse(id));
+        form.AddField("playerId", id);
 		form.AddField("car_name", name);
 
         WWW w = new WWW("https://derpturismo.000webhostapp.com/get_car_values.php", form);
         yield return w;
 
-		if (string.IsNullOrEmpty(w.error))
+        if (!string.IsNullOrEmpty(w.error))
             Debug.Log(w.error);
-        Debug.Log(w.text);
+      
 		string data = w.text;
 		string[] car = data.Split(',');
         if (car != null && car.Length > 0)
         {
-            //populateToggles(car);
+            populateToggles(car);
         }
         else
             Debug.Log("Error getting Car data.");
@@ -80,14 +80,17 @@ public class LoadPlayersCars : MonoBehaviour {
 	}
 
 	void dropdownValueChanged(Dropdown change){
-		StartCoroutine(getCarValues(playerID, change.itemText.text));
+		StartCoroutine(getCarValues(playerID, change.options[change.value].text));
     }
 
 	void populateToggles(string[] car) {
 		string engineTitle = "Engine " + car[4];
-        //Debug.Log(engineTitle);
+        Debug.Log(engineTitle);
 		engineToggle = GameObject.Find(engineTitle);
-		//engineToggle.GetComponent<Toggle>().isOn = true;
+        if (engineToggle == null)
+            Debug.Log("null engine Toggle");
+        Debug.Log(engineToggle.GetInstanceID());
+		engineToggle.GetComponentInChildren<Toggle>().isOn = true;
 	}
 
 	
