@@ -85,13 +85,17 @@ public class LoadPlayersCars : MonoBehaviour {
 
 	void populateToggles(string[] car) {
 		string engineTitle = "Engine " + car[4];
-        Debug.Log(engineTitle);
 		engineToggle = GameObject.Find(engineTitle);
-        if (engineToggle == null)
-            Debug.Log("null engine Toggle");
-        Debug.Log(engineToggle.GetInstanceID());
 		engineToggle.GetComponentInChildren<Toggle>().isOn = true;
-	}
+
+        string bodyTitle = "Body " + car[5];
+        bodyToggle = GameObject.Find(bodyTitle);
+        bodyToggle.GetComponentInChildren<Toggle>().isOn = true;
+
+        string tireTitle = "Tire " + car[3];
+        tireToggle = GameObject.Find(tireTitle);
+        tireToggle.GetComponentInChildren<Toggle>().isOn = true;
+    }
 
 	
 }
