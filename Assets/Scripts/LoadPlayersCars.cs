@@ -11,8 +11,13 @@ public class LoadPlayersCars : MonoBehaviour {
 	public string playerID;
 	WWWForm form;
 	public Dropdown dropdown;
+    public Dropdown currDropDown;
 	private Dropdown.OptionData newOption;
     public GameObject savebutton;
+    public GameObject deleteButton;
+
+    private string car_name;
+  
 
 	void Awake() {
 		if (Application.isEditor) {
@@ -29,7 +34,9 @@ public class LoadPlayersCars : MonoBehaviour {
 
 	void Start () {
         savebutton.GetComponent<Button>().onClick.AddListener(saveCar);
-		StartCoroutine("getCars"); 
+        deleteButton.GetComponent<Button>().onClick.AddListener(deleteCarButton);
+
+        StartCoroutine("getCars"); 
 	}
 
 	public IEnumerator getCars() {
@@ -82,6 +89,7 @@ public class LoadPlayersCars : MonoBehaviour {
 	}
 
 	void dropdownValueChanged(Dropdown change){
+        currDropDown = change;
 		StartCoroutine(getCarValues(playerID, change.options[change.value].text));
     }
 
@@ -97,11 +105,38 @@ public class LoadPlayersCars : MonoBehaviour {
         string tireTitle = "Tire " + car[3];
         tireToggle = GameObject.Find(tireTitle);
         tireToggle.GetComponentInChildren<Toggle>().isOn = true;
+
+        
+
+      
+      
+
+        
     }
 
     void saveCar()
     {
         Debug.Log("YOU CLICKED ME");
+    }
+
+
+    void deleteCarButton() {
+        StartCoroutine("deleteCar");
+        
+    }
+
+     IEnumerator deleteCar() {
+        string name = currDropDown.options[currDropDown.value].text;
+        form = new WWWForm();
+        form.AddField("playerId", playerID);
+        form.AddField("car_name", name);
+
+        WWW w = new WWW("https://derpturismo.000webhostapp.com/delete_car.php", form);
+        yield return w;
+
+        if (!string.IsNullOrEmpty(w.error))
+            Debug.Log(w.error);
+        Debug.Log(name);
     }
 	
 }
