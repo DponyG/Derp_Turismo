@@ -53,7 +53,7 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 		newPart.GetComponent<Text>().text = s[2] + " Cost: $" + s[1]
 											+ " Stat: " + s[3];
 		newPart.GetComponentInChildren<Toggle>().group = toggleGroupEngines;
-		newPart.name = s[0];
+		newPart.name = "Engine " + s[0];
 	}
 
 	void populateTire(string[] s) {
@@ -62,7 +62,7 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 		newPart.GetComponent<Text>().text = s[2] + " Cost: $" + s[1]
 											+ " Stat: " + s[3];
 		newPart.GetComponentInChildren<Toggle>().group = toggleGroupTires;
-		newPart.name = s[0];
+		newPart.name = "Tire " + s[0];
 	}
 
 	void populateBody(string[] s) {
@@ -71,7 +71,7 @@ public class UnlockedPartsSavedScript : MonoBehaviour {
 		newPart.GetComponent<Text>().text = s[2] + " Cost: $" + s[1]
 											+ " Stat: " + s[3];
 		newPart.GetComponentInChildren<Toggle>().group = toggleGroupBodies;
-		newPart.name = s[0];
+		newPart.name = "Body " + s[0];
 	}
 
 
