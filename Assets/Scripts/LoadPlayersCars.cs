@@ -12,6 +12,7 @@ public class LoadPlayersCars : MonoBehaviour {
 	WWWForm form;
 	public Dropdown dropdown;
 	private Dropdown.OptionData newOption;
+    public GameObject savebutton;
 
 	void Awake() {
 		if (Application.isEditor) {
@@ -27,6 +28,7 @@ public class LoadPlayersCars : MonoBehaviour {
 	}
 
 	void Start () {
+        savebutton.GetComponent<Button>().onClick.AddListener(saveCar);
 		StartCoroutine("getCars"); 
 	}
 
@@ -97,5 +99,9 @@ public class LoadPlayersCars : MonoBehaviour {
         tireToggle.GetComponentInChildren<Toggle>().isOn = true;
     }
 
+    void saveCar()
+    {
+        Debug.Log("YOU CLICKED ME");
+    }
 	
 }
